@@ -192,7 +192,7 @@ set(pion_LIBRARY ${pion_INSTALL_DIR}/lib/libpion.a)
 # Spooky hash
 ExternalProject_Add(
     spooky-hash
-    DOWNLOAD_COMMAND bash -c "wget -O spooky-hash/SpookyV2.cpp 'http://burtleburtle.net/bob/c/SpookyV2.cpp' && wget -O spooky-hash/SpookyV2.h 'http://burtleburtle.net/bob/c/SpookyV2.h'"
+    DOWNLOAD_COMMAND bash -c "wget -O spooky-hash/SpookyV2.cpp 'https://raw.githubusercontent.com/chauncey-77/fileshub/master/SpookyV2.cpp' && wget -O spooky-hash/SpookyV2.h 'https://raw.githubusercontent.com/chauncey-77/fileshub/master/SpookyV2.h'"
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/spooky-hash
     BUILD_IN_SOURCE ON
