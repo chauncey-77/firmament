@@ -82,7 +82,7 @@ find_package(GLog REQUIRED)
 ExternalProject_Add(
     gtest
     GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG 0fc5466dbb9e623029b1ada539717d10bd45e99e
+    GIT_TAG v1.8.x
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/gtest
     # no install required, we link the library from the build tree
@@ -120,7 +120,8 @@ if (${ENABLE_HDFS})
   find_package(LibXml2)
   ExternalProject_Add(
       libhdfs3
-      GIT_REPOSITORY https://github.com/PivotalRD/libhdfs3.git
+      # GIT_REPOSITORY https://github.com/PivotalRD/libhdfs3.git
+	  GIT_REPOSITORY https://github.com/bdrosen96/libhdfs3.git
       GIT_TAG v2.2.31
       TIMEOUT 10
       PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/libhdfs3
