@@ -149,6 +149,7 @@ ExternalProject_Add(
     protobuf3
     GIT_REPOSITORY https://github.com/protocolbuffers/protobuf
     GIT_TAG v3.12.4
+	GIT_SHALLOW true
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/protobuf3
     CONFIGURE_COMMAND "${CMAKE_COMMAND}"
