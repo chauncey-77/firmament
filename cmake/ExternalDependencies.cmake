@@ -148,10 +148,10 @@ find_package(OpenSSL REQUIRED)
 # protobuf3
 ExternalProject_Add(
     protobuf3
-    # GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
-    GIT_REPOSITORY git@github.com:protocolbuffers/protobuf.git
+    GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
+    # GIT_REPOSITORY git@github.com:protocolbuffers/protobuf.git
     # GIT_TAG v3.12.x
-    GIT_SHALLOW TRUE
+    GIT_SHALLOW 1
     GIT_CONFIG GIT_CURL_VERBOSE=1 GIT_TRACE=1
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/protobuf3
