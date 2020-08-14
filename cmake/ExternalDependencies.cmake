@@ -82,8 +82,8 @@ find_package(GLog REQUIRED)
 ExternalProject_Add(
     gtest
     GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG v1.10.x
-    GIT_SHALLOW true
+    # GIT_TAG v1.10.x
+    GIT_SHALLOW TRUE
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/gtest
     # no install required, we link the library from the build tree
@@ -148,17 +148,22 @@ find_package(OpenSSL REQUIRED)
 # protobuf3
 ExternalProject_Add(
     protobuf3
-    GIT_REPOSITORY https://github.com/protocolbuffers/protobuf
-    GIT_TAG v3.12.4
-    GIT_SHALLOW true
+    # GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
+    GIT_REPOSITORY git@github.com:protocolbuffers/protobuf.git
+    # GIT_TAG v3.12.x
+    GIT_SHALLOW TRUE
+    GIT_CONFIG GIT_CURL_VERBOSE=1 GIT_TRACE=1
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/protobuf3
     CONFIGURE_COMMAND "${CMAKE_COMMAND}"
                       "-H${CMAKE_CURRENT_BINARY_DIR}/third_party/protobuf3/src/protobuf3/cmake"
                       "-B${CMAKE_CURRENT_BINARY_DIR}/third_party/protobuf3/src/protobuf3-build"
                       "-Dprotobuf_BUILD_TESTS=off" "-DCMAKE_CXX_FLAGS=\"-fPIC\""
+                      "-Dprotobuf_VERBOSE=on"
     # no install required, we link the library from the build tree
-    INSTALL_COMMAND "")
+    INSTALL_COMMAND ""
+    LOG_DOWNLOAD ON
+    LOG_BUILD ON)
 
 ExternalProject_Get_Property(protobuf3 SOURCE_DIR)
 ExternalProject_Get_Property(protobuf3 BINARY_DIR)
