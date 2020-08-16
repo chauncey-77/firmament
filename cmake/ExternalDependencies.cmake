@@ -83,7 +83,7 @@ ExternalProject_Add(
     gtest
     GIT_REPOSITORY https://github.com/chauncey-77/googletest.git
     # GIT_TAG origin/release/1.10.0
-	GIT_TAG master
+	GIT_TAG origin/master
 	GIT_SHALLOW ON
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/gtest
@@ -124,7 +124,8 @@ if (${ENABLE_HDFS})
       libhdfs3
       # GIT_REPOSITORY https://github.com/PivotalRD/libhdfs3.git
 	  GIT_REPOSITORY https://github.com/bdrosen96/libhdfs3.git
-      GIT_TAG v2.2.31
+      # GIT_TAG v2.2.31
+	  GIT_TAG origin/master
       TIMEOUT 10
       PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/libhdfs3
       # no install required, we link the library from the build tree
@@ -152,7 +153,7 @@ ExternalProject_Add(
     # GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
     GIT_REPOSITORY https://github.com/chauncey-77/protobuf.git
     # GIT_TAG origin/release/3.13.0
-	GIT_TAG master
+	GIT_TAG origin/master
     GIT_SHALLOW ON
     # GIT_CONFIG GIT_CURL_VERBOSE=1 GIT_TRACE=1
     TIMEOUT 10
@@ -248,7 +249,7 @@ ExternalProject_Add(
     grpc
     GIT_REPOSITORY https://github.com/chauncey-77/grpc.git
     # GIT_TAG origin/release/1.31.0
-	GIT_TAG master
+	GIT_TAG origin/master
     GIT_SHALLOW ON
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/grpc
