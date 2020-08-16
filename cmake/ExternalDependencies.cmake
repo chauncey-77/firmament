@@ -81,8 +81,9 @@ find_package(GLog REQUIRED)
 # Google Test
 ExternalProject_Add(
     gtest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG v1.10.x
+    GIT_REPOSITORY git@github.com:google/googletest.git
+    GIT_TAG origin/release/1.10.0
+	GIT_SHALLOW ON
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/gtest
     # no install required, we link the library from the build tree
@@ -147,9 +148,10 @@ find_package(OpenSSL REQUIRED)
 # protobuf3
 ExternalProject_Add(
     protobuf3
-    GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
-    # GIT_REPOSITORY git@github.com:protocolbuffers/protobuf.git
-    # GIT_TAG v3.12.x
+    # GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
+    GIT_REPOSITORY git@github.com:protocolbuffers/protobuf.git
+    GIT_TAG origin/release/3.13.0
+    GIT_SHALLOW ON
     # GIT_CONFIG GIT_CURL_VERBOSE=1 GIT_TRACE=1
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/protobuf3
@@ -161,8 +163,7 @@ ExternalProject_Add(
     # no install required, we link the library from the build tree
     INSTALL_COMMAND ""
     LOG_DOWNLOAD ON
-    LOG_BUILD ON
-    GIT_SHALLOW 1)
+    LOG_BUILD ON)
 
 ExternalProject_Get_Property(protobuf3 SOURCE_DIR)
 ExternalProject_Get_Property(protobuf3 BINARY_DIR)
@@ -243,8 +244,9 @@ find_package(ZLIB REQUIRED)
 # grpc
 ExternalProject_Add(
     grpc
-    GIT_REPOSITORY https://github.com/grpc/grpc.git
-    # GIT_TAG v1.31.0
+    GIT_REPOSITORY git@github.com:grpc/grpc.git
+    GIT_TAG origin/release/1.31.0
+    GIT_SHALLOW ON
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/grpc
     DEPENDS protobuf3
@@ -259,8 +261,7 @@ ExternalProject_Add(
     # Wrap download, configure and build steps in a script to log output
     LOG_DOWNLOAD ON
     LOG_BUILD ON
-    LOG_INSTALL ON
-    GIT_SHALLOW 1)
+    LOG_INSTALL ON)
 
 ExternalProject_Get_Property(grpc SOURCE_DIR)
 ExternalProject_Get_Property(grpc BINARY_DIR)
