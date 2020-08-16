@@ -29,7 +29,7 @@ endif (${ENABLE_CS2})
 if (${ENABLE_PRIVATE_FLOWLESSLY})
   ExternalProject_Add(
       flowlessly
-      GIT_REPOSITORY git@github.com:chauncey-77/Flowlessly.git
+      GIT_REPOSITORY https://github.com/chauncey-77/Flowlessly.git
       TIMEOUT 10
       PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/flowlessly
       # no install required, we link the library from the build tree
@@ -81,7 +81,7 @@ find_package(GLog REQUIRED)
 # Google Test
 ExternalProject_Add(
     gtest
-    GIT_REPOSITORY git@github.com:chauncey-77/googletest.git
+    GIT_REPOSITORY https://github.com/chauncey-77/googletest.git
     # GIT_TAG origin/release/1.10.0
 	GIT_SHALLOW ON
     TIMEOUT 10
@@ -149,7 +149,7 @@ find_package(OpenSSL REQUIRED)
 ExternalProject_Add(
     protobuf3
     # GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
-    GIT_REPOSITORY git@github.com:chauncey-77/protobuf.git
+    GIT_REPOSITORY https://github.com/chauncey-77/protobuf.git
     # GIT_TAG origin/release/3.13.0
     GIT_SHALLOW ON
     # GIT_CONFIG GIT_CURL_VERBOSE=1 GIT_TRACE=1
@@ -244,7 +244,7 @@ find_package(ZLIB REQUIRED)
 # grpc
 ExternalProject_Add(
     grpc
-    GIT_REPOSITORY git@github.com:chauncey-77/grpc.git
+    GIT_REPOSITORY https://github.com/chauncey-77/grpc.git
     # GIT_TAG origin/release/1.31.0
     GIT_SHALLOW ON
     TIMEOUT 10
