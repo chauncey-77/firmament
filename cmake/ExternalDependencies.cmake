@@ -82,9 +82,8 @@ find_package(GLog REQUIRED)
 ExternalProject_Add(
     gtest
     GIT_REPOSITORY https://github.com/chauncey-77/googletest.git
-    # GIT_TAG origin/release/1.10.0
-	# GIT_TAG origin/master
-	# GIT_SHALLOW ON
+    GIT_TAG release-1.10.0
+	GIT_SHALLOW ON
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/gtest
     # no install required, we link the library from the build tree
