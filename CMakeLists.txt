@@ -3,6 +3,7 @@ project(Firmament)
 ################################################################################
 
 cmake_minimum_required(VERSION 2.8)
+add_definitions(-std=c++11)
 
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
