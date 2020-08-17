@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 RUN apt-get -y update --fix-missing
-RUN apt-get -y install git-core build-essential gnutls-bin make
+RUN apt-get -y install git-core build-essential gnutls-bin make wget
 
 RUN cd /tmp && \
 	wget https://github.com/Kitware/CMake/releases/download/v3.18.1/cmake-3.18.1.tar.gz && \
