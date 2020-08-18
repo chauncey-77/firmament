@@ -29,7 +29,7 @@ endif (${ENABLE_CS2})
 if (${ENABLE_PRIVATE_FLOWLESSLY})
   ExternalProject_Add(
       flowlessly
-      GIT_REPOSITORY https://github.com/chauncey-77/Flowlessly.git
+      GIT_REPOSITORY https://github.com/ICGog/Flowlessly.git
       TIMEOUT 10
       PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/flowlessly
       # no install required, we link the library from the build tree
@@ -81,8 +81,8 @@ find_package(GLog REQUIRED)
 # Google Test
 ExternalProject_Add(
     gtest
-    GIT_REPOSITORY https://github.com/chauncey-77/googletest.git
-    GIT_TAG "master"
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG v1.10.x
 	GIT_SHALLOW ON
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/gtest
@@ -123,8 +123,7 @@ if (${ENABLE_HDFS})
       libhdfs3
       # GIT_REPOSITORY https://github.com/PivotalRD/libhdfs3.git
 	  GIT_REPOSITORY https://github.com/bdrosen96/libhdfs3.git
-      # GIT_TAG v2.2.31
-	  GIT_TAG "master"
+      GIT_TAG v2.2.31
 	  GIT_SHALLOW ON
       TIMEOUT 10
       PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/libhdfs3
@@ -150,10 +149,8 @@ find_package(OpenSSL REQUIRED)
 # protobuf3
 ExternalProject_Add(
     protobuf3
-    # GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
-    GIT_REPOSITORY https://github.com/chauncey-77/protobuf.git
-    # GIT_TAG origin/release/3.13.0
-	GIT_TAG "master"
+    GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
+    GIT_TAG v3.5.1
     GIT_SHALLOW ON
     # GIT_CONFIG GIT_CURL_VERBOSE=1 GIT_TRACE=1
     TIMEOUT 10
@@ -161,12 +158,10 @@ ExternalProject_Add(
     CONFIGURE_COMMAND "${CMAKE_COMMAND}"
                       "-H${CMAKE_CURRENT_BINARY_DIR}/third_party/protobuf3/src/protobuf3/cmake"
                       "-B${CMAKE_CURRENT_BINARY_DIR}/third_party/protobuf3/src/protobuf3-build"
-                      "-Dprotobuf_BUILD_TESTS=off" "-DCMAKE_CXX_FLAGS=-fPIC -std=c++11"
+                      "-Dprotobuf_BUILD_TESTS=off" "-DCMAKE_CXX_FLAGS=\"-fPIC\""
                       "-Dprotobuf_VERBOSE=on"
     # no install required, we link the library from the build tree
-    INSTALL_COMMAND ""
-    LOG_DOWNLOAD ON
-    LOG_BUILD ON)
+    INSTALL_COMMAND "")
 
 ExternalProject_Get_Property(protobuf3 SOURCE_DIR)
 ExternalProject_Get_Property(protobuf3 BINARY_DIR)
@@ -247,9 +242,8 @@ find_package(ZLIB REQUIRED)
 # grpc
 ExternalProject_Add(
     grpc
-    GIT_REPOSITORY https://github.com/chauncey-77/grpc.git
-    # GIT_TAG origin/release/1.31.0
-	GIT_TAG "master"
+    GIT_REPOSITORY https://github.com/grpc/grpc.git
+    GIT_TAG v1.2.0
     GIT_SHALLOW ON
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/grpc
@@ -259,7 +253,7 @@ ExternalProject_Add(
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
         -DCMAKE_VERBOSE_MAKEFILE:BOOL=OFF
-        -DPROTOBUF_INCLUDE_DIRS:STRING=${PROTOBUF3_INCLUDE_DIR}
+        -DPROTOBUF_INCLUDE_DIRS:STRING=${protobuf3_INCLUDE_DIR}
         -DPROTOBUF_LIBRARIES:STRING=${protobuf3_LIBRARY}
         -DZLIB_ROOT:STRING=${ZLIB_INSTALL}
     # Wrap download, configure and build steps in a script to log output
