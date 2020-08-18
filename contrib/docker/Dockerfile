@@ -10,9 +10,11 @@ RUN cd /tmp && \
 	./bootstrap && make && make install && \
 	cd /
 
-RUN git clone -b dev https://github.com/Chauncey-77/firmament /firmament
+RUN git config --global http.postBuffer 1048576000
+RUN git config --global user.name "xuchangtiao"
+RUN git config --global user.email "xuchangtiao@buaa.edu.cn"
+RUN git clone -b dev https://github.com/Chauncey-77/firmament /firmament --depth 1
 RUN bash -c 'source /firmament/include/pkglist.Ubuntu-16.04 && apt-get -y install ${BASE_PKGS} ${COMPILER_PKGS} ${GOOGLE_PKGS} ${BOOST_PKGS} ${MISC_PKGS} ${HDFS_PKGS} ${PION_PKGS}'
 # RUN git config --global http.sslVerify false
-RUN git config --global http.postBuffer 1048576000
 RUN mkdir /var/log/firmament && cd /firmament && make && cd build && make -j12
 RUN apt-get clean
