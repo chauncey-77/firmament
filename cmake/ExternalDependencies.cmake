@@ -243,7 +243,7 @@ find_package(ZLIB REQUIRED)
 ExternalProject_Add(
     grpc
     GIT_REPOSITORY https://github.com/grpc/grpc.git
-    GIT_TAG v1.2.0
+    GIT_TAG v1.31.0
     GIT_SHALLOW ON
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/grpc
