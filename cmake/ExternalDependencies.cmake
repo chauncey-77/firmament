@@ -258,7 +258,7 @@ ExternalProject_Add(
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
         -DCMAKE_VERBOSE_MAKEFILE:BOOL=OFF
-        -DPROTOBUF_INCLUDE_DIRS:STRING=${protobuf3_INCLUDE_DIR}
+        -DPROTOBUF_INCLUDE_DIRS:STRING=${PROTOBUF3_INCLUDE_DIR}
         -DPROTOBUF_LIBRARIES:STRING=${protobuf3_LIBRARY}
         -DZLIB_ROOT:STRING=${ZLIB_INSTALL}
     # Wrap download, configure and build steps in a script to log output
