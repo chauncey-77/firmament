@@ -81,9 +81,11 @@ find_package(GLog REQUIRED)
 # Google Test
 ExternalProject_Add(
     gtest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG "master"
-	GIT_SHALLOW ON
+    # GIT_REPOSITORY https://github.com/google/googletest.git
+    # GIT_TAG "master"
+	# GIT_SHALLOW ON
+	GIT_REPOSITORY https://github.com/chauncey-77/googletest.git
+	GIT_TAG v1.10.x
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/gtest
     # no install required, we link the library from the build tree
@@ -149,10 +151,11 @@ find_package(OpenSSL REQUIRED)
 # protobuf3
 ExternalProject_Add(
     protobuf3
-    GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
-    GIT_TAG v3.5.1
-    GIT_SHALLOW ON
-    # GIT_CONFIG GIT_CURL_VERBOSE=1 GIT_TRACE=1
+    # GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
+    # GIT_TAG v3.5.1
+    # GIT_SHALLOW ON
+    GIT_REPOSITORY https://github.com/chauncey-77/protobuf.git
+	GIT_TAG v3.13.x
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/protobuf3
     CONFIGURE_COMMAND "${CMAKE_COMMAND}"
@@ -242,9 +245,11 @@ find_package(ZLIB REQUIRED)
 # grpc
 ExternalProject_Add(
     grpc
-    GIT_REPOSITORY https://github.com/grpc/grpc.git
-    GIT_TAG v1.31.0
-    GIT_SHALLOW ON
+    # GIT_REPOSITORY https://github.com/grpc/grpc.git
+    # GIT_TAG v1.31.0
+    # GIT_SHALLOW ON
+	GIT_REPOSITORY https://github.com/chauncey-77/grpc.git
+	GIT_TAG v1.2.0
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/grpc
     DEPENDS protobuf3
