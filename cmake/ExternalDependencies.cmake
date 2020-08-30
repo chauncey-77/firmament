@@ -155,7 +155,7 @@ ExternalProject_Add(
     # GIT_TAG v3.5.1
     # GIT_SHALLOW ON
     GIT_REPOSITORY https://github.com/chauncey-77/protobuf.git
-	GIT_TAG v3.13.x
+	GIT_TAG 3.13.x
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/protobuf3
     CONFIGURE_COMMAND "${CMAKE_COMMAND}"
