@@ -245,11 +245,11 @@ find_package(ZLIB REQUIRED)
 # grpc
 ExternalProject_Add(
     grpc
-    # GIT_REPOSITORY https://github.com/grpc/grpc.git
+    GIT_REPOSITORY https://github.com/grpc/grpc.git
     # GIT_TAG v1.31.0
     # GIT_SHALLOW ON
-	GIT_REPOSITORY https://github.com/chauncey-77/grpc.git
-	GIT_TAG v1.31.1
+    # GIT_REPOSITORY https://github.com/chauncey-77/grpc.git
+    GIT_TAG v1.31.1
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/grpc
     DEPENDS protobuf3
