@@ -249,7 +249,7 @@ ExternalProject_Add(
     # GIT_TAG v1.31.x
     # GIT_SHALLOW ON
     GIT_REPOSITORY https://github.com/chauncey-77/grpc.git
-    GIT_TAG master
+    GIT_TAG v1.32.x
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/grpc
     DEPENDS protobuf3
