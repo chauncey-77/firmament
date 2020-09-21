@@ -1,10 +1,10 @@
 FROM ubuntu:16.04
 
-echo "151.101.76.249 github.global-ssl.fastly.net
+RUN echo "151.101.76.249 github.global-ssl.fastly.net
 192.30.255.113 github.com
 
 151.101.76.133 raw.githubusercontent.com" >> /etc/hosts
-echo "# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+RUN echo "# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse
 # deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse
 deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse
