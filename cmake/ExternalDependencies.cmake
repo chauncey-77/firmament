@@ -120,7 +120,6 @@ if (${ENABLE_HDFS})
   find_package(LibXml2)
   ExternalProject_Add(
       libhdfs3
-      # GIT_REPOSITORY https://github.com/PivotalRD/libhdfs3.git
       GIT_REPOSITORY https://github.com/bdrosen96/libhdfs3.git
       GIT_TAG v2.2.31
       TIMEOUT 10
