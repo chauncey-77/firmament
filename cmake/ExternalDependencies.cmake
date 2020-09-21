@@ -120,7 +120,8 @@ if (${ENABLE_HDFS})
   find_package(LibXml2)
   ExternalProject_Add(
       libhdfs3
-      GIT_REPOSITORY https://github.com/PivotalRD/libhdfs3.git
+      # GIT_REPOSITORY https://github.com/PivotalRD/libhdfs3.git
+      GIT_REPOSITORY https://github.com/bdrosen96/libhdfs3.git
       GIT_TAG v2.2.31
       TIMEOUT 10
       PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/libhdfs3
@@ -192,7 +193,7 @@ set(pion_LIBRARY ${pion_INSTALL_DIR}/lib/libpion.a)
 # Spooky hash
 ExternalProject_Add(
     spooky-hash
-    DOWNLOAD_COMMAND bash -c "wget -O spooky-hash/SpookyV2.cpp 'http://burtleburtle.net/bob/c/SpookyV2.cpp' && wget -O spooky-hash/SpookyV2.h 'http://burtleburtle.net/bob/c/SpookyV2.h'"
+    DOWNLOAD_COMMAND bash -c "wget -O spooky-hash/SpookyV2.cpp 'https://raw.githubusercontent.com/chauncey-77/fileshub/master/SpookyV2.cpp' && wget -O spooky-hash/SpookyV2.h 'https://raw.githubusercontent.com/chauncey-77/fileshub/master/SpookyV2.h'"
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/spooky-hash
     BUILD_IN_SOURCE ON
@@ -236,8 +237,8 @@ find_package(ZLIB REQUIRED)
 # grpc
 ExternalProject_Add(
     grpc
-    GIT_REPOSITORY https://github.com/grpc/grpc.git
-    GIT_TAG v1.2.0
+    GIT_REPOSITORY https://github.com/chauncey-77/grpc.git
+    GIT_TAG v2.1.0
     TIMEOUT 10
     PREFIX ${CMAKE_CURRENT_BINARY_DIR}/third_party/grpc
     DEPENDS protobuf3

@@ -260,6 +260,7 @@ class FirmamentSchedulerServiceImpl final : public FirmamentScheduler::Service {
 
   Status Schedule(ServerContext* context, const ScheduleRequest* request,
                   SchedulingDeltas* reply) override {
+    LOG(INFO) << "[xct.schedule] start scheduling... ";
     boost::lock_guard<boost::recursive_mutex> lock(
         scheduler_->scheduling_lock_);
     // Clear unscheduled tasks related maps and sets of previous scheduling
@@ -269,9 +270,12 @@ class FirmamentSchedulerServiceImpl final : public FirmamentScheduler::Service {
     }
     SchedulerStats sstat;
     vector<SchedulingDelta> deltas;
+    LOG(INFO) << "[xct.schedule] start scheduler_->ScheduleAllJobs.";
     // Schedule tasks which does not have pod affinity/anti-affinity
     // requirements.
     scheduler_->ScheduleAllJobs(&sstat, &deltas);
+    LOG(INFO) << "[xct.schedule] finish scheduler_->ScheduleAllJobs.";
+    LOG(INFO) << "[xct.schedule] got " << deltas.size() << "deltas.";
 
     uint64_t total_unsched_tasks_size = 0;
     vector<uint64_t> unscheduled_batch_tasks;
@@ -279,9 +283,12 @@ class FirmamentSchedulerServiceImpl final : public FirmamentScheduler::Service {
       // Get unscheduled tasks of above scheduling round.
       cost_model_->GetUnscheduledTasks(&unscheduled_batch_tasks);
     }
+    LOG(INFO) << "[xct.schedule] start scheduler_->ScheduleAllAffinityBatchJobs.";
     // [pod affinity/anti-affinity batch schedule]
     vector<TaskID_t>* unsched_batch_affinity_tasks =
                   scheduler_->ScheduleAllAffinityBatchJobs(&sstat, &deltas);
+    LOG(INFO) << "[xct.schedule] finish scheduler_->ScheduleAllAffinityBatchJobs.";
+    LOG(INFO) << "[xct.schedule] got " << deltas.size() << "deltas.";
     for (auto unsched_batch_affinity_task : *unsched_batch_affinity_tasks) {
       unscheduled_batch_tasks.push_back(unsched_batch_affinity_task);
     }
@@ -292,6 +299,7 @@ class FirmamentSchedulerServiceImpl final : public FirmamentScheduler::Service {
     uint64_t elapsed = 0;
     unordered_set<uint64_t> unscheduled_affinity_tasks_set;
     vector<uint64_t> unscheduled_affinity_tasks;
+    LOG(INFO) << "[xct.schedule] start scheduler_->ScheduleAllQueueJobs.";
     while (affinity_antiaffinity_tasks_.size() &&
            (elapsed < FLAGS_queue_based_scheduling_time)) {
       uint64_t task_scheduled =
@@ -319,10 +327,13 @@ class FirmamentSchedulerServiceImpl final : public FirmamentScheduler::Service {
       clock_t stop = clock();
       elapsed = (double)(stop - start) * 1000.0 / CLOCKS_PER_SEC;
     }
+    LOG(INFO) << "[xct.schedule] finish scheduler_->ScheduleAllQueueJobs.";
+    LOG(INFO) << "[xct.schedule] start scheduler_->UpdateGangSchedulingDeltas.";
     scheduler_->UpdateGangSchedulingDeltas(&sstat, &deltas,
                                 &unscheduled_batch_tasks,
                                 &unscheduled_affinity_tasks_set,
                                 &unscheduled_affinity_tasks);
+    LOG(INFO) << "[xct.schedule] finish scheduler_->UpdateGangSchedulingDeltas.";
     // Get unscheduled tasks of above scheduling round which tried scheduling
     // tasks having pod affinity/anti-affinity. And populate the same into
     // reply.
