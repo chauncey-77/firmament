@@ -1,27 +1,10 @@
 FROM ubuntu:16.04
 
-RUN echo "151.101.76.249 github.global-ssl.fastly.net
-192.30.255.113 github.com
-
-151.101.76.133 raw.githubusercontent.com" >> /etc/hosts
-RUN echo "# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse
-# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse
-# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse
-# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse
-deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse
-# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse
-
-# 预发布软件源，不建议启用
-# deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse
-# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-proposed main restricted universe multiverse
-deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu xenial stable
-# deb-src [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu xenial stable" > /etc/apt/sources.list
+RUN echo "151.101.76.249 github.global-ssl.fastly.net\n192.30.255.113 github.com\n151.101.76.133 raw.githubusercontent.com" >> /etc/hosts
+RUN echo "deb http://mirrors.aliyun.com/ubuntu/ xenial main\ndeb-src http://mirrors.aliyun.com/ubuntu/ xenial main\ndeb http://mirrors.aliyun.com/ubuntu/ xenial-updates main\ndeb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main\ndeb http://mirrors.aliyun.com/ubuntu/ xenial universe\ndeb-src http://mirrors.aliyun.com/ubuntu/ xenial universe\ndeb http://mirrors.aliyun.com/ubuntu/ xenial-updates universe\ndeb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates universe\ndeb http://mirrors.aliyun.com/ubuntu/ xenial-security main\ndeb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main\ndeb http://mirrors.aliyun.com/ubuntu/ xenial-security universe\ndeb-src http://mirrors.aliyun.com/ubuntu/ xenial-security universe" > /etc/apt/sources.list
 
 RUN apt-get -y update --fix-missing
-RUN apt-get -y install git-core build-essential gnutls-bin make wget libssl-dev
+RUN apt-get -y install git-core build-essential gnutls-bin make wget libssl-dev apt-transport-https ca-certificates
 RUN git clone -b generateDockerImage https://github.com/chauncey-77/firmament /firmament
 RUN cd /tmp && \
 	wget https://github.com/Kitware/CMake/releases/download/v3.18.1/cmake-3.18.1.tar.gz && \
